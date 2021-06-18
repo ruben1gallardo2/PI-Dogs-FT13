@@ -1,0 +1,11 @@
+
+
+.tabla div tr td img {
+  width: 20vw;
+  padding: 15px;
+}
+.tabla div tr td {
+  display: block;
+  margin: auto 0px;
+  
+}
