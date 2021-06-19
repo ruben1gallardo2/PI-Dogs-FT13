@@ -7,8 +7,9 @@ import Principal from './components/Principal'
 function App() {
   return (
     <div className="App">
-      <h1>Henry Dogs</h1>
-      <Principal></Principal>
+      
+      <Inicio></Inicio>
+      <Route path="/principal" component={Principal}/>
     </div>
   );
 }
