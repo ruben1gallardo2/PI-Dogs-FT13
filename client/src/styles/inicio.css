@@ -1,13 +1,35 @@
-.inicio {
+@keyframes anim{
+  0% {background-image: url('../img/img-1.jpeg');} /*Amarillo*/
+ 25% {background-image: url('../img/img-2.jpeg');} /*Naranja*/
+ 50% {background-image: url('../img/img-3.jpeg');} /*Negro*/
+ 75% {background-image: url('../img/img-4.jpeg');} /*Otra vez naranja*/
+100% {background-image: url('../img/img-5.jpeg');} /*Otra vez amarillo*/
+}
+
+
+.relleno {
   width: 100%;
   height: 100vh;
   background-size: cover;
   background-repeat: no-repeat;
-  /* background-image: url('../img/img-1.jpeg'); */
+  z-index: -1;
+  position:absolute;
+  top: 0;
+  animation-name: anim;
+  animation-duration: 20s;
+  animation-iteration-count: infinite;
+}
+
+.inicio {
+  width: 100%;
+  height: 100vh;
+  background-color: transparent;
+  /* background-image: url('../../public/img/img-1.jpeg'); */
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center; 
+  z-index: 1;
 }
 
 .inicio span {
@@ -32,5 +54,6 @@
   transition: 800ms;
   background-color: var(--dark-color-btn);
   color: var(--light-color-btn);
+  border-color: var(--light-color-btn);
 }
 

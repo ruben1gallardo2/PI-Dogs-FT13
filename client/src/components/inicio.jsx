@@ -1,25 +1,25 @@
 import React, { useState, useEffect } from 'react'
-import { Router, Link } from 'react-router-dom'
+import { Router, Link, Switch, withRouter } from 'react-router-dom'
 import '../styles/inicio.css'
 
-function Inicio() {
+function Inicio(props) {
 
-  
+  const { history } = props; 
 
-
-  
-
-  
-
-  
   return (
-      <div className="inicio" style={{backgroundImage: `url(/img/img-1.jpeg)`}}>
-        <Link to="/principal">
-          <span><h2>Ve a la pagina principal</h2></span>
-        </Link>
-        <h4>Disfruta de la pagina web perruna</h4>
-      </div>
+    <div>
+      <div className="relleno"></div>  
+        <div className="inicio" >
+          <h4>Bienvenidos a la app Perruna</h4>
+          <button
+            onClick={() => history.push('/dogs')}
+          >
+            Ir a la pagina principal
+          </button>
+          
+        </div>
+    </div>
   )
 }
 
-export default Inicio
+export default withRouter(Inicio)

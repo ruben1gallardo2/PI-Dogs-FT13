@@ -1,0 +1,26 @@
+.navbar {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+  min-height: 6vh;
+  background-color: var(--dark-color-btn);
+}
+
+.navbar nav a{
+  margin: 0vw 5vw 0vw 5vw;
+  text-decoration: none;
+  padding: 1.1vh;
+  color: var(--dark-color-btn);
+  font-family: Georgia, 'Times New Roman', Times, serif;
+  font-weight: 700;
+  background-color: var(--light-color-btn);
+  border-radius: 12px;
+}
+
+.navbar nav a:hover {
+  color: var(--light-color-btn);
+  background-color: var(--medium-dark-color);
+  transition: 500ms;
+}
+

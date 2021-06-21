@@ -10,6 +10,7 @@ const { Razas, Temperamentos, razas_temperamentos } = require('../db.js')
 const API_URL = 'https://api.thedogapi.com/v1/breeds'
 const router = Router();
 
+//creo funcion asincrona para hacer peticiones a la api externa
 async function get_dogs_api(query) {
   let ruta = API_URL
   if (query) {
@@ -25,15 +26,26 @@ async function get_dogs_api(query) {
   }
 
   let result_api = dogs_api.map((val) => {
-    let img = val.image ? val.image.url : null
-    if (val.reference_image_id) {
-      img = `https://cdn2.thedogapi.com/images/${val.reference_image_id}.jpg`
+    let img = val.image ? val.image.url : 'https://placehold.co/600x400'
+    let controller = false
+
+    if (!val.image && val.reference_image_id && query) {
+      img = `https://cdn2.thedogapi.com/images/${val.reference_image_id}.jpg` //alternar jpg a png
+
+      // hay casos donde el formato de la imagen es .jp y otras .png
+      //se Alterna entre ambos con un metodo head
+      controller = true
     }
+
     let dogs = {
       id: val.id,
       nombre: val.name,
       imagen: img,
-      temperamento: val.temperament
+      altura: val.height.metric,
+      peso: val.weight.metric,
+      años_de_vida: val.life_span,
+      temperamento: val.temperament,
+      controller,
     }
     return dogs;
   })
@@ -90,12 +102,35 @@ router.get('/dogs', async (req, res) => {
   });
 
   let result = result_api.concat(result_local)
-  result.sort(() => Math.random() - 0.5);
+  // result.sort(() => Math.random() - 0.5);
+  //paginacion para mostrar 8
 
-  let seleccion = result.slice(0, 8)
-  seleccion = seleccion.filter(x => !!x)
-  res.status(200).json(seleccion)
-  
+  // let page = req.query.page || 1
+  // let inicio = 0 + 8 * (page - 1)
+  // let final = 8 + 8 * (page - 1)
+  // let seleccion = result.slice(inicio, final)
+  // seleccion = seleccion.filter(x => !!x)
+
+  // for (let s of result) {
+  //   if (s && s.controller) {
+  //     let response = null
+  //     let img_format = '.jpg'
+  //     try {
+  //       response = await fetch(s.imagen + ".jpg", {
+  //         method: 'HEAD'
+  //       })
+  //     } catch (e) {
+  //       console.error(e)
+  //     }
+  //     if (response.status !== 200) {
+  //       img_format = '.png'
+  //     }
+  //     s.imagen += img_format
+  //   }
+  // }
+
+  res.status(200).json(result)
+
 })
 
 router.get('/dogs/:id', async (req, res) => {
