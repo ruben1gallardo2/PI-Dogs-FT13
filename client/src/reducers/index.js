@@ -51,6 +51,12 @@ function rootReducer(state = initialState, action) {
         ...state,
         dogs: state.dogs.filter(value => value && value.temperamento && value.temperamento.includes(action.payload))
       }
+
+    case "SUBMIT_DOG": 
+      return {
+        ...state,
+        dogs: state.dogs.push(action.payload)
+      }
     default:
       return {
         ...state

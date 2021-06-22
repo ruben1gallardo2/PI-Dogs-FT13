@@ -5,7 +5,7 @@ import Dogs from './components/Dogs';
 import Inicio from './components/Inicio';
 import Principal from './components/Principal'
 import AddDog from './components/AddDog';
-import Navbar from './components/Navbar';
+
 
 function App() {
   return (

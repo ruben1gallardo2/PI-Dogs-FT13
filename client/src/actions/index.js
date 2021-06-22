@@ -88,3 +88,23 @@ export const setLoader = (value) => {
   }
 }
 
+export const submitDog = (value) => {
+  return async function(dispatch){
+    dispatch({ type: "SET_LOADER", payload: false })
+    let p = null
+    try {
+      p = await fetch (`http://localhost:3002/dog`,{
+            method: 'POST',
+            'Content-Type': 'application/json',
+            body: JSON.stringify(value)
+          })
+      p = await p.json()
+      
+    } catch (e) {
+      console.error(e)
+    }
+    dispatch({ type: "SET_LOADER", payload: true })
+    dispatch({ type: "SUBMIT_DOG", payload: p })
+  }
+}
+

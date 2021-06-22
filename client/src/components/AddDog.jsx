@@ -1,5 +1,7 @@
-import React, { useState } from 'react'
-import '../styles/addDog.css'
+import React, { useState } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
+import {submitDog} from '../actions/index'
+import '../styles/addDog.css';
 
 function AddDog() {
 
@@ -10,6 +12,8 @@ function AddDog() {
     años_de_vida:""
   })
 
+  const dispatch = useDispatch()
+
   function handleChange(e) {
     const newInput = {
       ...input,
@@ -18,11 +22,16 @@ function AddDog() {
     setInput(newInput)
   }
 
+  async function handleFormSubmit(value) {
+    
+    submitDog(value)
+  }
+
   return (
     <div>
         <h1>Añade tu perro</h1>
       <div className="cont">  
-        <form className="formulario">
+        <form className="formulario" onSubmit={() => handleFormSubmit(input)}>
           <label name="nombre">Nombre</label>
           <input type="text" name="nombre" value={input.nombre} onChange={handleChange} required/>
 
